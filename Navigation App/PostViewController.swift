@@ -33,22 +33,7 @@ class PostViewController: UIViewController {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showInfo))
         
-        let alertButton = UIButton(type: .system)
         
-        alertButton.setTitle("Check alert", for: .normal)
-        
-        alertButton.setImage(UIImage(systemName: "exclamationmark.triangle"), for: .normal)
-        
-        alertButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
-        
-        alertButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(alertButton)
-        
-        NSLayoutConstraint.activate([
-            alertButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            alertButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
         // Do any additional setup after loading the view.
     }
     
@@ -56,21 +41,13 @@ class PostViewController: UIViewController {
         let infoVC = UINavigationController()
         
         infoVC.viewControllers = [InfoViewController()]
-        
         infoVC.modalPresentationStyle = .pageSheet
         infoVC.modalTransitionStyle = .coverVertical
-        
+
         tabBarController?.present(infoVC, animated: true, completion: nil)
     }
     
-    @objc func showAlert() {
-        let alert = UIAlertController(title: "Alert", message: "Your post is not a post", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: {(alert: UIAlertAction!) in print("Foo")}))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(alert, animated: true, completion: {
-            return
-        })
-    }
+    
 
     /*
     // MARK: - Navigation

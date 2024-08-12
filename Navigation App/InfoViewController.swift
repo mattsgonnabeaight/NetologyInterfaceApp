@@ -17,10 +17,34 @@ class InfoViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(closeInfoView))
+        
+        let alertButton : UIButton = {
+            let button = UIButton(type: .system)
+            button.setTitle("Check alert", for: .normal)
+            button.setImage(UIImage(systemName: "exclamationmark.triangle"), for: .normal)
+            button.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            return button
+        }()
+        view.addSubview(alertButton)
+        
+        NSLayoutConstraint.activate([
+            alertButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            alertButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
     
     @objc func closeInfoView() {
             dismiss(animated: true)
+    }
+    
+    @objc func showAlert() {
+        let alert = UIAlertController(title: "Alert", message: "Your post is not a post", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: {(alert: UIAlertAction!) in print("Foo")}))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true, completion: {
+            return
+        })
     }
     
 

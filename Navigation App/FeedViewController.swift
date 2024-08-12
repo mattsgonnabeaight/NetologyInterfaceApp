@@ -11,36 +11,27 @@ class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.view.backgroundColor = .lightGray
         
-        let postButton = UIButton(type: .system)
-        
-        postButton.setTitle("New post", for: .normal)
-        
-        postButton.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
-        
-        postButton.addTarget(self, action: #selector(showPost), for: .touchUpInside)
-        
-        postButton.translatesAutoresizingMaskIntoConstraints = false
-        
+        let postButton : UIButton = {
+            let button = UIButton(type: .system)
+            button.setTitle("New post", for: .normal)
+            button.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
+            button.addTarget(self, action: #selector(showPost), for: .touchUpInside)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            return button
+        }()
         view.addSubview(postButton)
         
         NSLayoutConstraint.activate([
             postButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             postButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
-        
     }
     
     @objc func showPost() {
         let post = Post(title: "New Post")
-        
         let postVC = PostViewController(post: post)
-//        let postVC = UINavigationController()
-//        postVC.viewControllers = [PostViewController(post: post)
-        
         navigationController?.pushViewController(postVC, animated: true)
     }
     
